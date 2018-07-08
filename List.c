@@ -28,7 +28,7 @@ int list_size(List who){
 Bool list_add(List who, Type data){
 	Node newNode=(Node)malloc(sizeof(struct strNode));
 	if (newNode==NULL)
-		return false;
+		return Error;
 	newNode->data=data;
 	newNode->next=NULL;
 	if(list_size(who)==0){
@@ -41,14 +41,14 @@ Bool list_add(List who, Type data){
 	}
 	who->Last=newNode;
 	who->size++;
-	return true;
+	return Correcto;
 }
 Bool list_insert(List who, int p, Type data){
 	if(p>list_size(who)+1||p<1)
-		return false;
+		return Error;
 	Node newNode=(Node)malloc(sizeof(struct strNode));
 	if (newNode==NULL)
-		return false;
+		return Error;
 	newNode->data=data;
 	if(p==1){
 		newNode->prior=NULL;
@@ -72,7 +72,7 @@ Bool list_insert(List who, int p, Type data){
 			who->Last=newNode;
 	}
 	who->size++;
-	return true;
+	return Correcto;
 }
 
 Type list_remove(List who, int p){
