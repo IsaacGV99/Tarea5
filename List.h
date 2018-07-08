@@ -3,7 +3,7 @@
 
 typedef void* Type;
 typedef struct strList* List;
-typedef enum{false,true}Bool;
+typedef enum{Error,Correcto}Bool;
 
 List list_create();
 int list_size(List who);
