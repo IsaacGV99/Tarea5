@@ -62,7 +62,17 @@ boolean graph_addVertex(Graph who, Type data){
 	return true;
 }
 boolean graph_addEdge(Graph who, Type source, Type sink){
-    
+    	if (who==NULL)
+		return false;
+	unsigned long id;
+	while(who->functionCmp(who->vertex[id]->data,source)!=0){
+		id++;
+		if(id=who->size_vertex)
+			id-=who->size_vertex;
+	}
+	if(list_add(who->vertex[id]->adjVertex, sink))
+		return true;
+	return false;
 }
 unsigned long graph_vertexCount(Graph who){
 	if (who==NULL)
