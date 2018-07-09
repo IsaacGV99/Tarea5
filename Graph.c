@@ -43,20 +43,27 @@ boolean graph_addVertex(Graph who, Type data){
 	unsigned long id;    
 	if (who!=NULL){
 
-		id=index(data);
+		id=who->index(data);
 		Node new=(Node)malloc(sizeof(struct strNode);
 		new->data=data;
 		new->adjVertex=list_create();
 		if(who->vertex[id]==NULL){
 		    who->vertex[id]=new;
-	}
-	else
-		while(who->vertex[id]!=NULL){
-		    id=
 		}
-	    }
+		else{
+			boolean b_espacio=false;
+			while(who->vertex[id]!=NULL&&id<who->size_vertex){
+		    		id++;
+				if(who->vertex[id]==NULL)
+					b_espacio=true;	
+			}
+			if(b_espacio){
+				
+			}
+		}
+	}
 }
-boolean graph_addEdge(Graph who, Type source, Type sink){
+boolean graph_addEdge(Graph who, unsigned long source, unsigned long sink){
     
 }
 unsigned long graph_vertexCount(Graph who){
