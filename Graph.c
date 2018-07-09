@@ -59,7 +59,7 @@ boolean graph_addVertex(Graph who, Type data){
 		who->vertex[id]=new;
 	}
 	who->orden++;
-	return treu;
+	return true;
 }
 boolean graph_addEdge(Graph who, unsigned long source, unsigned long sink){
     
