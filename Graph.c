@@ -12,6 +12,7 @@ typedef struct strNode *Node;
 
 struct strGraph{
 	Node* vertex;
+	unsigned long size_vertex;
 	unsigned long orden;
 	unsigned long size;
 	Comparator functionCmp;
