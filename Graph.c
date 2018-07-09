@@ -77,7 +77,20 @@ unsigned long graph_edgeCount(Graph who){
 	return who->size;
 }
 unsigned long graph_outDegree(Graph who, Type source){
-    
+	Node temp;
+	unsigned long id;
+	if (who!=NULL){
+		id=index(source);
+		temp=who->vertex[id];
+		while(who->functionCmp(source, temp->data)!=0){
+			id++;
+			if(id==who->size_vertex)
+				id-=who->size_vertex;
+			temp=who->vertex[id];
+		}
+		return list_size(temp->adjVertex);		
+	}
+	return -1;
 }
 boolean graph_hasEdge(Graph who, Type source, Type sink){
     
