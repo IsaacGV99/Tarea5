@@ -33,4 +33,40 @@ Graph graph_create(Comparator cmp, Clone clone, MyFree myfree, MyPrint myprint){
 	}
 	return new;
 }
+void graph_destroy(Graph who){
+    
+}
+
+boolean graph_addVertex(Graph who, Type data){
+unsigned long id;    
+if (who!=NULL){
+    
+        id=index(data);
+        Node new=(Node)malloc(sizeof(struct strNode);
+        new->data=data;
+        new->adjVertex=list_create();
+        if(who->vertex[id]==NULL){
+            who->vertex[id]=new;
+}
+else
+        while(who->vertex[id]!=NULL){
+            id=
+        }
+    }
+}
+boolean graph_addEdge(Graph who, unsigned long source, unsigned long sink){
+    
+}
+unsigned long graph_vertexCount(Graph who){
+    if (who!=
+}
+unsigned long graph_edgeCount(Graph who){
+    
+}
+unsigned long graph_outDegree(Graph who, unsigned long source){
+    
+}
+boolean graph_hasEdge(Graph who, unsigned long source, unsigned long sink){
+    
+}
 
