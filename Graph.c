@@ -39,29 +39,27 @@ void graph_destroy(Graph who){
     
 }
 
-boolean graph_addVertex(Graph who, Type data){
-	unsigned long id;    
-	if (who!=NULL){
-
-		id=who->index(data);
-		Node new=(Node)malloc(sizeof(struct strNode);
-		new->data=data;
-		new->adjVertex=list_create();
-		if(who->vertex[id]==NULL){
-		    who->vertex[id]=new;
-		}
-		else{
-			boolean b_espacio=false;
-			while(who->vertex[id]!=NULL&&id<who->size_vertex){
-		    		id++;
-				if(who->vertex[id]==NULL)
-					b_espacio=true;	
-			}
-			if(b_espacio){
-				
-			}
-		}
+boolean graph_addVertex(Graph who, Type data){    
+	if (who==NULL)
+		return false;
+	unsigned long id;
+	id=who->index(data);
+	Node new=(Node)malloc(sizeof(struct strNode);
+	new->data=data;
+	new->adjVertex=list_create();
+	if(who->vertex[id]==NULL){
+		who->vertex[id]=new;
 	}
+	else{
+		while(who->vertex[id]!=NULL){
+			id++;
+			if(id=who->size_vertex)
+				id-=who->size_vertex;			
+		}
+		who->vertex[id]=new;
+	}
+	who->orden++;
+	return treu;
 }
 boolean graph_addEdge(Graph who, unsigned long source, unsigned long sink){
     
@@ -77,20 +75,7 @@ unsigned long graph_edgeCount(Graph who){
 	return who->size;
 }
 unsigned long graph_outDegree(Graph who, Type source){
-	Node temp;
-	unsigned long id;
-	if (who!=NULL){
-		id=index(source);
-		temp=who->vertex[id];
-		while(who->functionCmp(source, temp->data)!=0){
-			id++;
-			if(id==who->size_vertex)
-				id-=who->size_vertex;
-			temp=who->vertex[id];
-		}
-		return list_size(temp->adjVertex);		
-	}
-	return -1;
+    
 }
 boolean graph_hasEdge(Graph who, Type source, Type sink){
     
