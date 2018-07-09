@@ -40,21 +40,21 @@ void graph_destroy(Graph who){
 }
 
 boolean graph_addVertex(Graph who, Type data){
-unsigned long id;    
-if (who!=NULL){
-    
-        id=index(data);
-        Node new=(Node)malloc(sizeof(struct strNode);
-        new->data=data;
-        new->adjVertex=list_create();
-        if(who->vertex[id]==NULL){
-            who->vertex[id]=new;
-}
-else
-        while(who->vertex[id]!=NULL){
-            id=
-        }
-    }
+	unsigned long id;    
+	if (who!=NULL){
+
+		id=index(data);
+		Node new=(Node)malloc(sizeof(struct strNode);
+		new->data=data;
+		new->adjVertex=list_create();
+		if(who->vertex[id]==NULL){
+		    who->vertex[id]=new;
+	}
+	else
+		while(who->vertex[id]!=NULL){
+		    id=
+		}
+	    }
 }
 boolean graph_addEdge(Graph who, unsigned long source, unsigned long sink){
     
