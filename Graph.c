@@ -24,7 +24,8 @@ struct strGraph{
 Graph graph_create(Comparator cmp, Clone clone, MyFree myfree, MyPrint myprint){
 	Graph new=(Graph)malloc(sizeof(struct strGraph));
 	if(new!=NULL){
-		new->vertex=NULL;
+		new->vertex=(Node*)calloc(100,sizeof(Node);
+		new->size_vertex=100;
 		new->orden=0;
 		new->size=0;
 		new->functionCmp=cmp;
