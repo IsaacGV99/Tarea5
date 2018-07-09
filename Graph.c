@@ -69,10 +69,10 @@ unsigned long graph_edgeCount(Graph who){
 		return -1;
 	return who->size;
 }
-unsigned long graph_outDegree(Graph who, unsigned long source){
+unsigned long graph_outDegree(Graph who, Type source){
     
 }
-boolean graph_hasEdge(Graph who, unsigned long source, unsigned long sink){
+boolean graph_hasEdge(Graph who, Type source, Type sink){
     
 }
 
