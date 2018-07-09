@@ -56,7 +56,7 @@ boolean graph_addVertex(Graph who, Type data){
 		}
 	    }
 }
-boolean graph_addEdge(Graph who, unsigned long source, unsigned long sink){
+boolean graph_addEdge(Graph who, Type source, Type sink){
     
 }
 unsigned long graph_vertexCount(Graph who){
