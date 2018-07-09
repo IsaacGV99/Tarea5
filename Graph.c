@@ -58,10 +58,14 @@ boolean graph_addEdge(Graph who, unsigned long source, unsigned long sink){
     
 }
 unsigned long graph_vertexCount(Graph who){
-    if (who!=
+	if (who==NULL)
+		return -1;
+	return who->orden;
 }
 unsigned long graph_edgeCount(Graph who){
-    
+	if (who==NULL)
+		return -1;
+	return who->size;
 }
 unsigned long graph_outDegree(Graph who, unsigned long source){
     
