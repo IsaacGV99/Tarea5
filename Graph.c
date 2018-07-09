@@ -59,7 +59,7 @@ boolean graph_addVertex(Graph who, Type data){
 		who->vertex[id]=new;
 	}
 	who->orden++;
-	return true;
+	return treu;
 }
 boolean graph_addEdge(Graph who, unsigned long source, unsigned long sink){
     
@@ -75,7 +75,22 @@ unsigned long graph_edgeCount(Graph who){
 	return who->size;
 }
 unsigned long graph_outDegree(Graph who, Type source){
-    
+	Node temp;
+	unsigned long id;
+	if (who!=NULL){
+		id=index(source); 
+		temp=who->vertex[id];
+		while(who->functionCmp(source, temp->data)!=0){
+			id++;
+			//Si el id, sobrepasa el tamaño de la lista de los vertices
+			//se reinicia el id restandole el tamñao de la lista.
+			if(id==who->size_vertex)
+				id-=who->size_vertex;
+			temp=who->vertex[id];
+		}
+		return list_size(temp->adjVertex);		
+	}
+	return -1;
 }
 boolean graph_hasEdge(Graph who, Type source, Type sink){
     
