@@ -35,8 +35,24 @@ Graph graph_create(Comparator cmp, Clone clone, MyFree myfree, MyPrint myprint){
 	}
 	return new;
 }
+					  
 void graph_destroy(Graph who){
-    
+	//lista, nodo, graph
+	Node temp;
+	unsigned long id=0;
+	if (who!=NULL){
+		while(id<who->size_vertex){
+			temp=who->vertex[id];
+			if(temp!=NULL){
+				if (temp->adjVertex!=NULL)
+					list_destroy(temp->adjVertex);
+				free(temp);
+			}
+			id++;
+		}
+		free(who);
+	}
+
 }
 
 boolean graph_addVertex(Graph who, Type data){    
