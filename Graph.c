@@ -25,8 +25,8 @@ struct strGraph{
 Graph graph_create(Comparator cmp,Index indice /*Clone clone, MyFree myfree*/, MyPrint myprint){
 	Graph new=(Graph)malloc(sizeof(struct strGraph));
 	if(new!=NULL){
-		new->vertex=(Node*)calloc(100,sizeof(Node));
-		new->size_vertex=100;
+		new->size_vertex=50;
+		new->vertex=(Node*)calloc(new->size_vertex,sizeof(Node))
 		new->orden=0;
 		new->size=0;
 		new->functionCmp=cmp;
@@ -154,3 +154,27 @@ void graph_print(Graph who){
 		}
 	}
 }
+Graph graph_redimention(Graph who);
+Graph graph_redimention(Graph who){
+	if(who==NULL)
+		return NULL;
+	Graph new=(Graph)malloc(sizeof(struct strGraph));
+	if(new==NULL)
+		return NULL;
+	new->size_vertex=who->size_vertex*(1.2);
+	new->vertex=(Node*)calloc(new->size_vertex,sizeof(Node))
+	new->orden=0;
+	new->size=0;
+	new->functionCmp=who->functionCmp;
+	new->functionIndex=who->functionIndex;
+	new->functionPrint=who->functionPrint;
+	for(unsigned long i=0;i<who->size_vertex;i++){
+		Node temp=who->vertex[i];
+		if(temp!=NULL)
+			graph_addVertex(new,temp->data);
+			if(temp->adjVertex!=NULL){
+				
+			}
+	}
+	
+
