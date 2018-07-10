@@ -123,4 +123,9 @@ unsigned long graph_outDegree(Graph who, Type source){
 boolean graph_hasEdge(Graph who, Type source, Type sink){
     
 }
+			      
+boolean graph_print(Graph who, MyPrint printFunction){
+    
+}
+			      
 
