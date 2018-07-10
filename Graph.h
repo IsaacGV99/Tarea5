@@ -19,6 +19,6 @@ unsigned long graph_vertexCount(Graph who);
 unsigned long graph_edgeCount(Graph who);
 unsigned long graph_outDegree(Graph who, unsigned long source);
 boolean graph_hasEdge(Graph who, unsigned long source, unsigned long sink);
-boolean graph_print(Graph who, MyPrint printFunction);
+void graph_print(Graph who, MyPrint printFunction);
 
 #endif /* GRAPH_H_ */
