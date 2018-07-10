@@ -11,10 +11,15 @@ struct strPerson{
 	int year;
 	char[50] movie;
 };
+struct strMovie{
+	char[20] movie;
+	int year;
+	char[50] sinapsis;
+};
 
 int compareString(Type data1, Type data2){
-	char* v1=*(struct strPerson *)data1;
-	char* v2=*(struct strPerson *)data2;
+	struct strPerson v1=*(struct strPerson *)data1;
+	struct strPerson v2=*(struct strPerson *)data2;
 	return strcmp(v1.actor,v2.actor);
 }
 void printString(Type data){
