@@ -52,7 +52,6 @@ void graph_destroy(Graph who){
 		}
 		free(who);
 	}
-
 }
 
 boolean graph_addVertex(Graph who, Type data){    
