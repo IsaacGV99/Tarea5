@@ -162,19 +162,24 @@ Graph graph_redimention(Graph who){
 	if(new==NULL)
 		return NULL;
 	new->size_vertex=who->size_vertex*(1.2);
-	new->vertex=(Node*)calloc(new->size_vertex,sizeof(Node))
-	new->orden=0;
-	new->size=0;
+	new->vertex=(Node*)calloc(new->size_vertex,sizeof(Node));
+	new->orden=who->orden;
+	new->size=who->size;
 	new->functionCmp=who->functionCmp;
 	new->functionIndex=who->functionIndex;
 	new->functionPrint=who->functionPrint;
 	for(unsigned long i=0;i<who->size_vertex;i++){
 		Node temp=who->vertex[i];
-		if(temp!=NULL)
-			graph_addVertex(new,temp->data);
-			if(temp->adjVertex!=NULL){
-				
-			}
+		if(temp!=NULL){
+			temp->id=new->functionIndex(temp->data,new->size_vertex);
+			while(new->vertex[temp->id]!=NULL)
+				temp->id++;
+			new->vertex[temp->id]=temp;
+		}	
 	}
+	fre(who);
+	return new;
+}
+	
 	
 
