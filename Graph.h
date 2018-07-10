@@ -3,7 +3,7 @@
 
 typedef void* Type;
 typedef int(*Comparator)(Type, Type);
-typedef unsigned long(*Index)(Type);
+typedef unsigned long(*Index)(Type,unsigned long);
 //typedef Type(*Clone)(Type);
 //typedef void (*MyFree)(Type);
 typedef void (*MyPrint)(Type);
