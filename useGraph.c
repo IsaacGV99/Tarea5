@@ -23,7 +23,7 @@ int compareString(Type data1, Type data2){
 	return strcmp(v1.actor,v2.actor);
 }
 void printString(Type data){
-	struct strPerson v1=(struct strPerson *)data;
+	struct strPerson v1=*(struct strPerson *)data;
 	printf(" %s ", v1.actor);
 	printf(" %d ", v1.year);
 	printf(" %s ", v1.movie);
