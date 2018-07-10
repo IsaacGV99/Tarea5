@@ -22,9 +22,9 @@ int main(){
 	FILE *vertex_personFile;
 	FILE *vertex_moviesFile;
 	FILE *edgesPersonFile;
-	vertex_personFile=fopen("vertex_personFile.txt","r");
-	vertex_moviesFile=fopen("vertex_moviesFile.txt","r");
-	edgesPersonFile=fopen("edgesPersonFile.txt","r");
+	vertex_personFile=fopen("vertex_person.csv","r");
+	vertex_moviesFile=fopen("vertex_movies.csv","r");
+	edgesPersonFile=fopen("edgesPerson.csv","r");
 	
 	
 	
