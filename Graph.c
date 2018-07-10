@@ -19,10 +19,10 @@ struct strGraph{
 	Index functionIndex;
 	//Clone functionClone;
 	//MyFree functionFree;
-	//MyPrint functionPrint;
+	MyPrint functionPrint;
 };
 
-Graph graph_create(Comparator cmp,Index indice /*Clone clone, MyFree myfree, MyPrint myprint*/){
+Graph graph_create(Comparator cmp,Index indice /*Clone clone, MyFree myfree*/, MyPrint myprint){
 	Graph new=(Graph)malloc(sizeof(struct strGraph));
 	if(new!=NULL){
 		new->vertex=(Node*)calloc(100,sizeof(Node);
@@ -33,7 +33,7 @@ Graph graph_create(Comparator cmp,Index indice /*Clone clone, MyFree myfree, MyP
 		new->fuctionIndex=indice;
 		//new->functionClone=clone;
 		//new->functionFree=myfree;
-		//new->functionPrint=myprint;
+		new->functionPrint=myprint;
 	}
 	return new;
 }
