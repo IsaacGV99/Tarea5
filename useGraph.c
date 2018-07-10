@@ -6,6 +6,7 @@
 int compareString(Type, Type);
 void printString(Type data);
 
+
 struct strPerson{
 	char[20] actor;
 	int year;
@@ -16,6 +17,20 @@ struct strMovie{
 	int year;
 	char[50] sinapsis;
 };
+
+int main(){
+	FILE *vertex_personFile;
+	FILE *vertex_moviesFile;
+	FILE *edgesPersonFile;
+	vertex_personFile=fopen("vertex_personFile.txt","r");
+	vertex_moviesFile=fopen("vertex_moviesFile.txt","r");
+	edgesPersonFile=fopen("edgesPersonFile.txt","r");
+	
+	
+	
+	return 0;
+}
+
 
 int compareString(Type data1, Type data2){
 	struct strPerson v1=*(struct strPerson *)data1;
