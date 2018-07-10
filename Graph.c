@@ -121,11 +121,23 @@ unsigned long graph_outDegree(Graph who, Type source){
 	return -1;
 }
 boolean graph_hasEdge(Graph who, Type source, Type sink){
-    
+	if(who==NULL)
+		return false;
+	unsigned long id=who->functionIndex(source);
+	while(who->functionCmp(who->vertex[id]->data,source)!=0){
+		id++;
+		if(id=who->size_vertex)
+			id-=who->size_vertex;
+	}
+	List list_Vertex=who->vertex[id]->adjVertex;
+	int i=1;
+	Type temp;
+	while(i<=list_size(list_Vertex)){
+		temp=list_get(list_Vertex,i);
+		if(who->fuctioinCmp(temp,sink)==0)
+			return true;
+		i++;
+	}
+	retrurn false;
 }
-			      
-boolean graph_print(Graph who, MyPrint printFunction){
-    
-}
-			      
 
