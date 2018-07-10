@@ -141,3 +141,15 @@ boolean graph_hasEdge(Graph who, Type source, Type sink){
 	retrurn false;
 }
 
+void graph_print(Graph who){
+	Node temp;
+	unsigned long id;
+	if (who!=NULL){
+		while (id<who->size_vertex){
+			temp=who->size_vertex[id];
+		if (temp!=NULL)
+				who->functionPrint(temp->data);	
+		id++;
+		}	
+	}
+}
