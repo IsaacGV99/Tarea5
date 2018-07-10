@@ -16,12 +16,13 @@ struct strGraph{
 	unsigned long orden;
 	unsigned long size;
 	Comparator functionCmp;
-	Clone functionClone;
-	MyFree functionFree;
-	MyPrint functionPrint;
+	Index functionIndex;
+	//Clone functionClone;
+	//MyFree functionFree;
+	//MyPrint functionPrint;
 };
 
-Graph graph_create(Comparator cmp, Clone clone, MyFree myfree, MyPrint myprint){
+Graph graph_create(Comparator cmp,Index indice /*Clone clone, MyFree myfree, MyPrint myprint*/){
 	Graph new=(Graph)malloc(sizeof(struct strGraph));
 	if(new!=NULL){
 		new->vertex=(Node*)calloc(100,sizeof(Node);
@@ -29,9 +30,10 @@ Graph graph_create(Comparator cmp, Clone clone, MyFree myfree, MyPrint myprint){
 		new->orden=0;
 		new->size=0;
 		new->functionCmp=cmp;
-		new->functionClone=clone;
-		new->functionFree=myfree;
-		new->functionPrint=myprint;
+		new->fuctionIndex=indice;
+		//new->functionClone=clone;
+		//new->functionFree=myfree;
+		//new->functionPrint=myprint;
 	}
 	return new;
 }
@@ -58,7 +60,7 @@ boolean graph_addVertex(Graph who, Type data){
 	if (who==NULL)
 		return false;
 	unsigned long id;
-	id=who->index(data);
+	id=who->fuctionIndex(data);
 	Node new=(Node)malloc(sizeof(struct strNode);
 	new->data=data;
 	new->adjVertex=list_create();
@@ -80,6 +82,7 @@ boolean graph_addEdge(Graph who, Type source, Type sink){
     	if (who==NULL)
 		return false;
 	unsigned long id;
+	id=who->fuctionIndex(source);
 	while(who->functionCmp(who->vertex[id]->data,source)!=0){
 		id++;
 		if(id=who->size_vertex)
@@ -103,7 +106,7 @@ unsigned long graph_outDegree(Graph who, Type source){
 	Node temp;
 	unsigned long id;
 	if (who!=NULL){
-		id=index(source); 
+		id=who->functionIndex(source); 
 		temp=who->vertex[id];
 		while(who->functionCmp(source, temp->data)!=0){
 			id++;
