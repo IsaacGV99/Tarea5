@@ -25,19 +25,19 @@ struct strGraph{
 Graph graph_create(Comparator cmp,Index indice /*Clone clone, MyFree myfree*/, MyPrint myprint){
 	Graph new=(Graph)malloc(sizeof(struct strGraph));
 	if(new!=NULL){
-		new->vertex=(Node*)calloc(100,sizeof(Node);
+		new->vertex=(Node*)calloc(100,sizeof(Node));
 		new->size_vertex=100;
 		new->orden=0;
 		new->size=0;
 		new->functionCmp=cmp;
-		new->fuctionIndex=indice;
+		new->functionIndex=indice;
 		//new->functionClone=clone;
 		//new->functionFree=myfree;
 		new->functionPrint=myprint;
 	}
 	return new;
 }
-					  
+
 void graph_destroy(Graph who){
 	//lista, nodo, graph
 	Node temp;
@@ -56,12 +56,12 @@ void graph_destroy(Graph who){
 	}
 }
 
-boolean graph_addVertex(Graph who, Type data){    
+boolean graph_addVertex(Graph who, Type data){
 	if (who==NULL)
 		return false;
 	unsigned long id;
-	id=who->fuctionIndex(data);
-	Node new=(Node)malloc(sizeof(struct strNode);
+	id=who->functionIndex(data);
+	Node new=(Node)malloc(sizeof(struct strNode));
 	new->data=data;
 	new->adjVertex=list_create();
 	if(who->vertex[id]==NULL){
@@ -70,8 +70,8 @@ boolean graph_addVertex(Graph who, Type data){
 	else{
 		while(who->vertex[id]!=NULL){
 			id++;
-			if(id=who->size_vertex)
-				id-=who->size_vertex;			
+			if(id==who->size_vertex)
+				id-=who->size_vertex;
 		}
 		who->vertex[id]=new;
 	}
@@ -82,14 +82,16 @@ boolean graph_addEdge(Graph who, Type source, Type sink){
     	if (who==NULL)
 		return false;
 	unsigned long id;
-	id=who->fuctionIndex(source);
+	id=who->functionIndex(source);
 	while(who->functionCmp(who->vertex[id]->data,source)!=0){
 		id++;
-		if(id=who->size_vertex)
+		if(id==who->size_vertex)
 			id-=who->size_vertex;
 	}
-	if(list_add(who->vertex[id]->adjVertex, sink))
+	if(list_add(who->vertex[id]->adjVertex, sink)){
+		who->size++;
 		return true;
+	}
 	return false;
 }
 unsigned long graph_vertexCount(Graph who){
@@ -106,7 +108,7 @@ unsigned long graph_outDegree(Graph who, Type source){
 	Node temp;
 	unsigned long id;
 	if (who!=NULL){
-		id=who->functionIndex(source); 
+		id=who->functionIndex(source);
 		temp=who->vertex[id];
 		while(who->functionCmp(source, temp->data)!=0){
 			id++;
@@ -116,7 +118,7 @@ unsigned long graph_outDegree(Graph who, Type source){
 				id-=who->size_vertex;
 			temp=who->vertex[id];
 		}
-		return list_size(temp->adjVertex);		
+		return list_size(temp->adjVertex);
 	}
 	return -1;
 }
@@ -126,7 +128,7 @@ boolean graph_hasEdge(Graph who, Type source, Type sink){
 	unsigned long id=who->functionIndex(source);
 	while(who->functionCmp(who->vertex[id]->data,source)!=0){
 		id++;
-		if(id=who->size_vertex)
+		if(id==who->size_vertex)
 			id-=who->size_vertex;
 	}
 	List list_Vertex=who->vertex[id]->adjVertex;
@@ -134,22 +136,21 @@ boolean graph_hasEdge(Graph who, Type source, Type sink){
 	Type temp;
 	while(i<=list_size(list_Vertex)){
 		temp=list_get(list_Vertex,i);
-		if(who->fuctioinCmp(temp,sink)==0)
+		if(who->functionCmp(temp,sink)==0)
 			return true;
 		i++;
 	}
-	retrurn false;
+	return false;
 }
-
 void graph_print(Graph who){
 	Node temp;
-	unsigned long id;
+	unsigned long id=0;
 	if (who!=NULL){
 		while (id<who->size_vertex){
-			temp=who->size_vertex[id];
+			temp=who->vertex[id];
 		if (temp!=NULL)
-				who->functionPrint(temp->data);	
+				who->functionPrint(temp->data);
 		id++;
-		}	
+		}
 	}
 }
