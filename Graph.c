@@ -60,21 +60,19 @@ boolean graph_addVertex(Graph who, Type data){
 	if (who==NULL)
 		return false;
 	unsigned long id;
-	id=who->functionIndex(data);
+	id=who->functionIndex(data,who->size_vertex);
 	Node new=(Node)malloc(sizeof(struct strNode));
 	new->data=data;
 	new->adjVertex=list_create();
-	if(who->vertex[id]==NULL){
-		who->vertex[id]=new;
-	}
-	else{
+	if(who->vertex[id]!=NULL){
 		while(who->vertex[id]!=NULL){
 			id++;
 			if(id==who->size_vertex)
 				id-=who->size_vertex;
 		}
-		who->vertex[id]=new;
 	}
+	new->id=id;
+	who->vertex[id]=new;
 	who->orden++;
 	return true;
 }
@@ -82,7 +80,7 @@ boolean graph_addEdge(Graph who, Type source, Type sink){
     	if (who==NULL)
 		return false;
 	unsigned long id;
-	id=who->functionIndex(source);
+	id=who->functionIndex(source,who->size_vertex);
 	while(who->functionCmp(who->vertex[id]->data,source)!=0){
 		id++;
 		if(id==who->size_vertex)
@@ -108,7 +106,7 @@ unsigned long graph_outDegree(Graph who, Type source){
 	Node temp;
 	unsigned long id;
 	if (who!=NULL){
-		id=who->functionIndex(source);
+		id=who->functionIndex(source, who->size_vertex);
 		temp=who->vertex[id];
 		while(who->functionCmp(source, temp->data)!=0){
 			id++;
