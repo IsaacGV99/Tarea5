@@ -25,9 +25,16 @@ int main(){
 	vertex_personFile=fopen("vertex_person.csv","r");
 	vertex_moviesFile=fopen("vertex_movies.csv","r");
 	edgesPersonFile=fopen("edgesPerson.csv","r");
-	
-	
-	
+	if(vertex_personFile==NULL||vertex_moviesFile==NULL||edgesPersonFile==NULL)
+		printf("Error al abrir el archivo\n");
+	else{
+		char buff[100];
+		int i=0;
+		while(buff!=","){
+			fscanf(vertex_personFile, "%c",&buff[i]);
+			i++;
+		}				 
+	}
 	return 0;
 }
 
