@@ -25,8 +25,8 @@ struct strGraph{
 Graph graph_create(Comparator cmp,Index indice /*Clone clone, MyFree myfree*/, MyPrint myprint){
 	Graph new=(Graph)malloc(sizeof(struct strGraph));
 	if(new!=NULL){
-		new->size_vertex=50;
-		new->vertex=(Node*)calloc(new->size_vertex,sizeof(Node))
+		new->size_vertex=30;
+		new->vertex=(Node*)calloc(new->size_vertex,sizeof(Node));
 		new->orden=0;
 		new->size=0;
 		new->functionCmp=cmp;
@@ -55,10 +55,31 @@ void graph_destroy(Graph who){
 		free(who);
 	}
 }
+void graph_redimention(Graph who);
+void graph_redimention(Graph who){
+		if(who!=NULL){
+		unsigned long newsize_vertex=(who->size_vertex)*1.2;
+		Node* newVertex=(Node*)calloc(newsize_vertex,sizeof(Node));
+		for(unsigned long i=0;i<who->size_vertex;i++){
+			Node temp=who->vertex[i];
+			if(temp!=NULL){
+				temp->id=who->functionIndex(temp->data,newsize_vertex);
+				while(newVertex[temp->id]!=NULL)
+					temp->id++;
+				newVertex[temp->id]=temp;
+			}
+		}
+		who->size_vertex=newsize_vertex;
+		free(who->vertex);
+		who->vertex=newVertex;
+		}
+}
 
 boolean graph_addVertex(Graph who, Type data){
 	if (who==NULL)
 		return false;
+	if((who->size_vertex*0.8)<who->orden)
+		graph_redimention(who);
 	unsigned long id;
 	id=who->functionIndex(data,who->size_vertex);
 	Node new=(Node)malloc(sizeof(struct strNode));
@@ -123,7 +144,7 @@ unsigned long graph_outDegree(Graph who, Type source){
 boolean graph_hasEdge(Graph who, Type source, Type sink){
 	if(who==NULL)
 		return false;
-	unsigned long id=who->functionIndex(source);
+	unsigned long id=who->functionIndex(source, who->size_vertex);
 	while(who->functionCmp(who->vertex[id]->data,source)!=0){
 		id++;
 		if(id==who->size_vertex)
@@ -152,32 +173,8 @@ void graph_print(Graph who){
 		}
 	}
 }
-Graph graph_redimention(Graph who);
-Graph graph_redimention(Graph who){
-	if(who==NULL)
-		return NULL;
-	Graph new=(Graph)malloc(sizeof(struct strGraph));
-	if(new==NULL)
-		return NULL;
-	new->size_vertex=who->size_vertex*(1.2);
-	new->vertex=(Node*)calloc(new->size_vertex,sizeof(Node));
-	new->orden=who->orden;
-	new->size=who->size;
-	new->functionCmp=who->functionCmp;
-	new->functionIndex=who->functionIndex;
-	new->functionPrint=who->functionPrint;
-	for(unsigned long i=0;i<who->size_vertex;i++){
-		Node temp=who->vertex[i];
-		if(temp!=NULL){
-			temp->id=new->functionIndex(temp->data,new->size_vertex);
-			while(new->vertex[temp->id]!=NULL)
-				temp->id++;
-			new->vertex[temp->id]=temp;
-		}	
-	}
-	fre(who);
-	return new;
-}
+
+
 	
 	
 
