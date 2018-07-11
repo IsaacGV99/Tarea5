@@ -27,6 +27,8 @@ Graph graph_create(Comparator cmp,Index indice /*Clone clone, MyFree myfree*/, M
 	if(new!=NULL){
 		new->size_vertex=200;
 		new->vertex=(Node*)calloc(new->size_vertex,sizeof(Node));
+		if(new->vertex==NULL)
+			return NULL;
 		new->orden=0;
 		new->size=0;
 		new->functionCmp=cmp;
@@ -58,9 +60,8 @@ void graph_destroy(Graph who){
 void graph_redimention(Graph who);
 void graph_redimention(Graph who){
 		if(who!=NULL){
-		unsigned long newsize_vertex=(who->size_vertex)*1.2;
-		printf("%li",who->size_vertex);
-		printf("%li",newsize_vertex);
+		unsigned long newsize_vertex=(who->size_vertex)*3/2;
+		printf("%li %li\n",who->size_vertex,newsize_vertex);
 		Node* newVertex=(Node*)calloc(newsize_vertex,sizeof(Node));
 		for(unsigned long i=0;i<who->size_vertex;i++){
 			Node temp=who->vertex[i];
@@ -80,10 +81,10 @@ void graph_redimention(Graph who){
 boolean graph_addVertex(Graph who, Type data){
 	if (who==NULL)
 		return false;
-	/*if((who->size_vertex*4/5)<who->orden){
-		printf("entro");
+	if((who->size_vertex*4/5)<who->orden){
+		printf("entro al agrandador\n");
 		graph_redimention(who);
-	}*/
+	}
 	unsigned long id;
 	id=who->functionIndex(data,who->size_vertex);
 	while(who->vertex[id]!=NULL){
