@@ -85,12 +85,13 @@ boolean graph_addVertex(Graph who, Type data){
 	Node new=(Node)malloc(sizeof(struct strNode));
 	new->data=data;
 	new->adjVertex=list_create();
-	if(who->vertex[id]!=NULL){
-		while(who->vertex[id]!=NULL){
-			id++;
-			if(id==who->size_vertex)
-				id-=who->size_vertex;
-		}
+	while(who->vertex[id]!=NULL){
+		if(who->fuctionCmp(who->vertex[id]->data,data)==0)
+			free(new);
+			return false;
+		id++;
+		if(id==who->size_vertex)
+			id-=who->size_vertex;
 	}
 	new->id=id;
 	who->vertex[id]=new;
