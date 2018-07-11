@@ -87,6 +87,7 @@ boolean graph_addVertex(Graph who, Type data){
 	new->adjVertex=list_create();
 	while(who->vertex[id]!=NULL){
 		if(who->fuctionCmp(who->vertex[id]->data,data)==0)
+			list_destroy(new->adjVertex);
 			free(new);
 			return false;
 		id++;
