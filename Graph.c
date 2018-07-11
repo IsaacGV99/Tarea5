@@ -82,18 +82,16 @@ boolean graph_addVertex(Graph who, Type data){
 		graph_redimention(who);
 	unsigned long id;
 	id=who->functionIndex(data,who->size_vertex);
-	Node new=(Node)malloc(sizeof(struct strNode));
-	new->data=data;
-	new->adjVertex=list_create();
 	while(who->vertex[id]!=NULL){
 		if(who->fuctionCmp(who->vertex[id]->data,data)==0)
-			list_destroy(new->adjVertex);
-			free(new);
 			return false;
 		id++;
 		if(id==who->size_vertex)
 			id-=who->size_vertex;
 	}
+	Node new=(Node)malloc(sizeof(struct strNode));
+	new->data=data;
+	new->adjVertex=list_create();
 	new->id=id;
 	who->vertex[id]=new;
 	who->orden++;
