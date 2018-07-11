@@ -25,7 +25,7 @@ struct strGraph{
 Graph graph_create(Comparator cmp,Index indice /*Clone clone, MyFree myfree*/, MyPrint myprint){
 	Graph new=(Graph)malloc(sizeof(struct strGraph));
 	if(new!=NULL){
-		new->size_vertex=30;
+		new->size_vertex=200;
 		new->vertex=(Node*)calloc(new->size_vertex,sizeof(Node));
 		new->orden=0;
 		new->size=0;
@@ -59,6 +59,8 @@ void graph_redimention(Graph who);
 void graph_redimention(Graph who){
 		if(who!=NULL){
 		unsigned long newsize_vertex=(who->size_vertex)*1.2;
+		printf("%li",who->size_vertex);
+		printf("%li",newsize_vertex);
 		Node* newVertex=(Node*)calloc(newsize_vertex,sizeof(Node));
 		for(unsigned long i=0;i<who->size_vertex;i++){
 			Node temp=who->vertex[i];
@@ -78,18 +80,22 @@ void graph_redimention(Graph who){
 boolean graph_addVertex(Graph who, Type data){
 	if (who==NULL)
 		return false;
-	if((who->size_vertex*0.8)<who->orden)
+	/*if((who->size_vertex*4/5)<who->orden){
+		printf("entro");
 		graph_redimention(who);
+	}*/
 	unsigned long id;
 	id=who->functionIndex(data,who->size_vertex);
 	while(who->vertex[id]!=NULL){
-		if(who->fuctionCmp(who->vertex[id]->data,data)==0)
+		if(who->functionCmp(who->vertex[id]->data,data)==0)
 			return false;
 		id++;
 		if(id==who->size_vertex)
 			id-=who->size_vertex;
 	}
 	Node new=(Node)malloc(sizeof(struct strNode));
+	if (new==NULL)
+		return false;
 	new->data=data;
 	new->adjVertex=list_create();
 	new->id=id;
@@ -98,19 +104,26 @@ boolean graph_addVertex(Graph who, Type data){
 	return true;
 }
 boolean graph_addEdge(Graph who, Type source, Type sink){
-    	if (who==NULL)
+    if (who==NULL)
 		return false;
 	unsigned long id;
 	id=who->functionIndex(source,who->size_vertex);
-	while(who->functionCmp(who->vertex[id]->data,source)!=0){
+	while(who->vertex[id]!=NULL){
+		if(who->functionCmp(who->vertex[id]->data,source)==0){
+			if(list_add(who->vertex[id]->adjVertex, sink)){
+					who->size++;
+					return true;
+			}
+			else{
+				printf("No sirvio list_add\n");
+				return false;
+			}
+		}
 		id++;
 		if(id==who->size_vertex)
 			id-=who->size_vertex;
 	}
-	if(list_add(who->vertex[id]->adjVertex, sink)){
-		who->size++;
-		return true;
-	}
+	printf("No encontro nombre\n");
 	return false;
 }
 unsigned long graph_vertexCount(Graph who){
@@ -163,6 +176,8 @@ boolean graph_hasEdge(Graph who, Type source, Type sink){
 }
 void graph_print(Graph who){
 	Node temp;
+	printf("%li",who->orden);
+	printf("%li",who->size_vertex);
 	unsigned long id=0;
 	if (who!=NULL){
 		while (id<who->size_vertex){
@@ -173,8 +188,4 @@ void graph_print(Graph who){
 		}
 	}
 }
-
-
-	
-	
 
